@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>計算ヒーロー03</title>
-  <meta property="og:title" content="計算ヒーロー03">
-    <meta property="og:description" content="【１年算数たし算ひき算】３つの数の計算の練習アプリです。">
-    <meta property="og:type" content="website">
+  <title>計算ヒーロー - ３つのかずのけいさん</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Canvas Confetti -->
@@ -700,7 +697,7 @@
       for (let a = 3; a <= 10; a++) {
         for (let b = 1; b <= a - 1; b++) {
           const rem = a - b;
-          for (let c = 1; c <= rem; c++) {
+          for (let c = 1; c < rem; c++) {
             problems.push({ n1: a, op1: '-', n2: b, op2: '-', n3: c, subAns: rem, finalAns: rem - c });
           }
         }
@@ -716,7 +713,7 @@
 
       // パターン5: 8-6+5 (たし算・ひき算混合 10まで)
       for (let a = 2; a <= 10; a++) {
-        for (let b = 1; b <= a; b++) {
+        for (let b = 1; b <= a - 1; b++) {
           const rem = a - b;
           for (let c = 1; c <= 10 - rem; c++) {
             problems.push({ n1: a, op1: '-', n2: b, op2: '+', n3: c, subAns: rem, finalAns: rem + c });
@@ -732,7 +729,8 @@
         }
       }
 
-      return problems;
+      // 答え（最終答えおよび途中の計算結果）が0より大きい問題のみを出題対象にする
+      return problems.filter(p => p.finalAns > 0 && p.subAns > 0);
     }
 
     function shuffleArray(arr) {
